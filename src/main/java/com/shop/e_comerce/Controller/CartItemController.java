@@ -27,8 +27,11 @@ public class CartItemController {
                                                      @RequestParam Integer quantity) {
         try {
             if (cartId == null) {
+                System.out.println(55);
                 cartId= cartService.initializeNewCart();
             }
+            System.out.println(55);
+
             cartItemService.addItemToCart(cartId, productId, quantity);
             return ResponseEntity.ok(new APIResponse("Add Item Success", null));
         } catch (ResourceNotFoundExeption e) {

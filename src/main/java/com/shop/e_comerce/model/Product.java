@@ -1,5 +1,6 @@
 package com.shop.e_comerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.catalina.LifecycleState;
@@ -22,6 +23,7 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    @JsonIgnore
     private List<Image> images;
 
     public Product(String name, String brand, BigDecimal price, int inventory, String description, Category category) {
