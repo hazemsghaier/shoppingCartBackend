@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -26,6 +27,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public User() {
     }
@@ -46,6 +50,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     public String getFirstName() {
@@ -95,4 +107,5 @@ public class User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
 }

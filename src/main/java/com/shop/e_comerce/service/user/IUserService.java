@@ -11,6 +11,6 @@ public interface IUserService {
     User createUser(CreateUserRequest request);
     User updateUser(UserUpdateRequest request, Long userId);
     void deleteUser(Long userId);
-
+    User  getAuthentificatedUser();
     UserDto convertUserToDto(User user);
 }
